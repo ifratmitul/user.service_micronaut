@@ -3,7 +3,7 @@ micronaut:
     name: udemy
 
 datasources:
-  default":
+  default:
     url: jdbc:mysql://localhost:3306/eShop
     username: mitul
     password: 61234567
@@ -15,8 +15,13 @@ jpa:
     properties:
       hibernate:
         hbm2ddl:
-          auto: update
+          auto: none
         show_sql: true
+
+flyway:
+  datasources:
+    default:
+      enabled: true
 
 netty:
   default:
