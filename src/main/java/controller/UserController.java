@@ -6,6 +6,7 @@ import io.micronaut.http.annotation.*;
 import model.User;
 import service.UserService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller("/api/users")
@@ -18,7 +19,7 @@ public class UserController {
     }
 
     @Post
-    public HttpResponse<User> createUser(@Body User user) {
+    public HttpResponse<User> createUser(@Body @Valid User user) {
         return HttpResponse.created(_userService.createUser(user));
     }
 
@@ -38,8 +39,8 @@ public class UserController {
     }
 
     @Delete("/{id}")
-    public HttpResponse<String> deleteUser (@PathVariable int id) {
-        return HttpResponse.ok(_userService.deleteUser(id));
+    public void deleteUser (@PathVariable int id) {
+       _userService.deleteUser(id);
     }
 
 }

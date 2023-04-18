@@ -1,51 +1,44 @@
 package service;
 
+import Exceptions.UserNotFoundException;
 import jakarta.inject.Singleton;
 import model.User;
+import userservice.com.repository.UserRepository;
 
 import java.util.*;
 
 @Singleton
 public class UserService {
-    private final List<User> users = new ArrayList<>();
+
+    private final UserRepository _userRepository;
+
+    public UserService(UserRepository userRepository) {
+        _userRepository = userRepository;
+    }
 
     public User createUser (User user) {
-        users.add(user);
-        return user;
+        return _userRepository.save(user);
     }
 
     public List<User> getUserList () {
-        return this.users;
+        return _userRepository.findAll();
     }
 
     public User getUserbyId(int id) {
-        return users.stream().filter(user -> user.getId() == id).findFirst().orElse(null);
+        return _userRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
     }
 
     public User updateUser(int id, User user) {
         User u = getUserbyId(id);
-
-        if(u == null) {
-            return null;
-        }
         u.setEmail(user.getEmail());
         u.setName(user.getName());
         u.setMobileNumber(user.getMobileNumber());
-        return u;
+
+        return _userRepository.update(u);
     }
 
-    public String deleteUser(int id) {
-        if(getUserbyId(id) != null) {
-            users.removeIf(u -> u.getId() == id);
-            return "Removed successfully";
-
-        }
-
-        return "Not found";
+    public void deleteUser(int id) {
+        _userRepository.deleteById(id);
     }
-
-
-
-
-    }
+}
 
