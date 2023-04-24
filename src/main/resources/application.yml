@@ -1,6 +1,10 @@
 micronaut:
   application:
     name: udemy
+  server:
+    port: ${SERVER_PORT:8080}
+    cors:
+      enabled: true
 
 datasources:
   default:
@@ -27,3 +31,7 @@ netty:
   default:
     allocator:
       max-order: 3
+
+shedlock:
+  defaults:
+    lock-at-most-for: 1m

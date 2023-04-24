@@ -4,6 +4,7 @@ import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.*;
 
 import model.User;
+import model.UserResponse;
 import service.UserService;
 
 import javax.validation.Valid;
@@ -31,6 +32,11 @@ public class UserController {
     @Get("/{id}")
     public HttpResponse<User> getUserById(@PathVariable int id) {
         return HttpResponse.ok(_userService.getUserbyId(id));
+    }
+
+    @Get("/user-preference/{id}")
+    public HttpResponse<UserResponse> getUserDetails(@PathVariable int id) {
+        return HttpResponse.ok(_userService.getUserDetails(id));
     }
 
     @Put("/{id}")
