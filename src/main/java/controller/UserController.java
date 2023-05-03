@@ -3,6 +3,8 @@ package controller;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.*;
 
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 import model.User;
 import model.UserResponse;
 import service.UserService;
@@ -10,6 +12,7 @@ import service.UserService;
 import javax.validation.Valid;
 import java.util.List;
 
+@Secured(SecurityRule.IS_AUTHENTICATED)
 @Controller("/api/users")
 public class UserController {
 
@@ -29,9 +32,16 @@ public class UserController {
         return HttpResponse.ok(_userService.getUserList());
     }
 
+    @Secured(SecurityRule.IS_ANONYMOUS)
     @Get("/{id}")
     public HttpResponse<User> getUserById(@PathVariable int id) {
         return HttpResponse.ok(_userService.getUserbyId(id));
+    }
+
+    @Secured(SecurityRule.IS_ANONYMOUS)
+    @Get("/email/{email}")
+    public HttpResponse<User> getUserById(@PathVariable String email) {
+        return HttpResponse.ok(_userService.getUserByEmail(email));
     }
 
     @Get("/user-preference/{id}")

@@ -27,4 +27,7 @@ public class User {
     @NotBlank
     @Column
     private String email;
+    @NotBlank
+    @Column
+    private String password;
 }

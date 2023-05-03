@@ -102,6 +102,26 @@
       <version>4.34.0</version>
     </dependency>
     <dependency>
+      <groupId>io.micronaut.data</groupId>
+      <artifactId>micronaut-data-jdbc</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.micronaut.reactor</groupId>
+      <artifactId>micronaut-reactor</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.micronaut.reactor</groupId>
+      <artifactId>micronaut-reactor-http-client</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.micronaut.security</groupId>
+      <artifactId>micronaut-security-jwt</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>net.javacrumbs.shedlock</groupId>
       <artifactId>shedlock-provider-jdbc-micronaut</artifactId>
       <version>4.34.0</version>
@@ -168,6 +188,16 @@
               <artifactId>micronaut-data-processor</artifactId>
               <version>${micronaut.data.version}</version>
             </path>
+                        <path>
+                          <groupId>io.micronaut.security</groupId>
+                          <artifactId>micronaut-security-annotations</artifactId>
+                          <version>${micronaut.security.version}</version>
+                        </path>
+            <path>
+                            <groupId>io.micronaut</groupId>
+                            <artifactId>micronaut-graal</artifactId>
+                            <version>${micronaut.version}</version>
+                          </path>
           </annotationProcessorPaths>
           <compilerArgs>
             <arg>-Amicronaut.processing.group=userservice.com</arg>
